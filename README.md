@@ -106,6 +106,8 @@ http://127.0.0.1:8000/sante
 
 La recherche peut être effectuée par titre ou auteur avec le paramètre `q`. Il est également possible de filtrer par catégorie et disponibilité.
 
+La pagination est prise en charge avec les paramètres skip et limit. La valeur de skip doit être positive ou nulle et limit est compris entre 1 et 100.
+
 ### 7. Validation et gestion des erreurs
 
 Les données sont validées avec Pydantic.
@@ -131,6 +133,14 @@ Les données sont validées avec Pydantic.
 **PUT et PATCH :** PUT remplace les données d'une ressource, tandis que PATCH modifie uniquement les champs transmis.
 
 **Idempotence :** une opération idempotente produit le même état final lorsqu'elle est exécutée plusieurs fois avec les mêmes données. PUT et DELETE sont conçus comme des opérations idempotentes.
+
+# ExPlication : Difference entre PUT et PATCH
+
+PUT remplace complètement une ressource existante par les nouvelles données transmises.  
+PATCH modifie uniquement les champs spécifiés sans remplacer toute la ressource.  
+PUT est idempotent, car répéter la même requête produit le même état final de la ressource.  
+DELETE est idempotent, car supprimer plusieurs fois la même ressource laisse toujours cette ressource absente.  
+POST n'est pas idempotent, car répéter une requête peut créer plusieurs ressources différentes.
 
 ### 9. Base de données
 
@@ -198,6 +208,7 @@ Résultat obtenu : **8 tests réussis**.
 - Documentation Python
 - Documentation SQLModel
 - Pytest
+- ChatGPT (assistance pour l'explication, le débogage et la vérification du projet).
 
 ### 14. Dépôt GitHub
 

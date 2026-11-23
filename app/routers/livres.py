@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status, Query
 from sqlmodel import Session, select
 
 from app.database import get_session
@@ -36,12 +36,10 @@ def lister_livres(
     q: Optional[str] = None,
     categorie: Optional[str] = None,
     disponible: Optional[bool] = None,
-    skip: int = 0,
-    limit: int = 100,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=100),
     session: Session = Depends(get_session)
 ):
-    if limit > 100:
-        raise HTTPException(status_code=422, detail="La limite maximale est 100.")
 
     requete = select(Livre)
 
